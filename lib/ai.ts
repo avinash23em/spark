@@ -45,7 +45,7 @@ export async function generateRelatedIdeas(nodeText: string, parentText?: string
     prompt += `. Return only the ideas as a numbered list, with each idea being 1-5 words.`;
 
     const response = await openai.chat.completions.create({
-      model: "openai/gpt-4o",
+      model: "meta-llama/llama-3.3-8b-instruct:free",
       messages: [
         {
           role: "system",
