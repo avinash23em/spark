@@ -35,18 +35,26 @@ const nodeTypes = {
 }
 
 // Initial nodes and edges for a new mind map
-const getInitialNodes = (id: string): Node[] => [
+const getInitialNodes = (
+  id: string,
+  editNodeLabel: (id: string, newLabel: string) => void,
+  setIsEditing: (editing: boolean) => void
+): Node[] => [
   {
     id: "1",
     type: "custom",
     data: {
       label: "Central Idea",
       expanded: true,
-      color: "#3b82f6", // blue-500
+      color: "#3b82f6",
+      onChange: editNodeLabel,
+      onStartEditing: () => setIsEditing(true),
+      onStopEditing: () => setIsEditing(false),
     },
     position: { x: 0, y: 0 },
   },
 ]
+
 
 const initialEdges: Edge[] = []
 
@@ -104,7 +112,7 @@ function MindMapContent({ mapId, onCreateNewMap }: MindMapProps) {
           const newMap: MindMapData = {
             id: mapId,
             title: "Untitled Mind Map",
-            nodes: getInitialNodes(mapId),
+            nodes: getInitialNodes(mapId, editNodeLabel, setIsEditing),
             edges: [],
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -172,7 +180,7 @@ function MindMapContent({ mapId, onCreateNewMap }: MindMapProps) {
     const newMap: MindMapData = {
       id,
       title,
-      nodes: getInitialNodes(id),
+      nodes: getInitialNodes(id, editNodeLabel, setIsEditing),
       edges: [],
       createdAt: new Date(),
       updatedAt: new Date(),
