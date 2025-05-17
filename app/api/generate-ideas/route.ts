@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     // Generate ideas using OpenAI
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "meta-llama/llama-3.3-8b-instruct:free",
       messages: [
         {
           role: "system",
