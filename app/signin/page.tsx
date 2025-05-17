@@ -1,3 +1,4 @@
+ export const dynamic = "force-dynamic";
 import { SignIn } from "@/components/auth/sign-in"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
